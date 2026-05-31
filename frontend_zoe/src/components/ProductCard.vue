@@ -55,44 +55,57 @@
     </div>
 
     <!-- Info -->
-    <RouterLink :to="`/product/${product.id}`" class="block p-4">
-      <p v-if="product.category" class="text-zinc-600 text-xs uppercase tracking-widest mb-1">
-        {{ categoryLabel[product.category] || product.category }}
-      </p>
-      <h3 class="text-white text-sm font-medium mb-2 line-clamp-2">{{ product.name }}</h3>
+    <div class="p-4">
+      <RouterLink :to="`/product/${product.id}`" class="block">
+        <p v-if="product.category" class="text-zinc-600 text-xs uppercase tracking-widest mb-1">
+          {{ categoryLabel[product.category] || product.category }}
+        </p>
+        <h3 class="text-white text-sm font-medium mb-2 line-clamp-2">{{ product.name }}</h3>
+        <div class="flex items-center gap-2">
+          <span v-if="product.is_promo && product.promo_price" class="text-gold-500 font-semibold">
+            R$ {{ Number(product.promo_price).toFixed(2).replace('.', ',') }}
+          </span>
+          <span
+            :class="
+              product.is_promo && product.promo_price
+                ? 'text-zinc-600 line-through text-xs'
+                : 'text-white font-semibold'
+            "
+          >
+            R$ {{ Number(product.price).toFixed(2).replace('.', ',') }}
+          </span>
+        </div>
+      </RouterLink>
 
-      <!-- Preço -->
-      <div class="flex items-center gap-2">
-        <span v-if="product.is_promo && product.promo_price" class="text-gold-500 font-semibold">
-          R$ {{ Number(product.promo_price).toFixed(2).replace('.', ',') }}
-        </span>
-        <span
-          :class="
-            product.is_promo && product.promo_price
-              ? 'text-zinc-600 line-through text-xs'
-              : 'text-white font-semibold'
-          "
-        >
-          R$ {{ Number(product.price).toFixed(2).replace('.', ',') }}
-        </span>
-      </div>
-    </RouterLink>
+      <!-- Botão carrinho -->
+      <button
+        v-if="product.stock > 0"
+        @click="addToCart"
+        class="w-full mt-3 bg-zinc-800 hover:bg-gold-500 hover:text-black text-zinc-300 text-xs font-medium py-2 rounded-xl transition-colors"
+      >
+        {{ added ? '✓ Adicionado!' : 'Adicionar ao carrinho' }}
+      </button>
+      <p v-else class="text-center text-zinc-600 text-xs mt-3">Indisponível</p>
+    </div>
   </article>
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { useAuthStore } from '../stores/auth.js'
 import { useFavoritesStore } from '../stores/favorites.js'
+import { useCartStore } from '../stores/cart.js'
 
 const props = defineProps({ product: { type: Object, required: true } })
 
 const auth = useAuthStore()
+const added = ref(false)
 
 let favStore
-try {
-  favStore = useFavoritesStore()
-} catch {}
+try { favStore = useFavoritesStore() } catch {}
+
+let cartStore
+try { cartStore = useCartStore() } catch {}
 
 const isFav = computed(() => favStore?.isFavorite(props.product.id) || false)
 
@@ -100,10 +113,18 @@ function toggleFavorite() {
   favStore?.toggle(props.product.id)
 }
 
+function addToCart() {
+  cartStore?.add(props.product)
+  added.value = true
+  setTimeout(() => added.value = false, 2000)
+}
+
 const categoryLabel = {
   aneis: 'Anéis',
   colares: 'Colares',
   brincos: 'Brincos',
-  pulseiras: 'Pulseiras',
+  pulseiras: 'Pulseiras'
 }
 </script>
+
+
