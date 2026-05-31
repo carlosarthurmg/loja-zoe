@@ -1,0 +1,101 @@
+<template>
+  <main class="min-h-screen bg-zinc-950 flex items-center justify-center px-4">
+    <div class="w-full max-w-md">
+
+      <!-- Logo -->
+      <div class="text-center mb-8">
+        <h1 class="text-4xl font-light tracking-[0.3em] text-gold-500">ZOE</h1>
+        <p class="text-zinc-500 text-sm mt-1 tracking-widest">JOIAS</p>
+      </div>
+
+      <!-- Card -->
+      <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-8">
+        <h2 class="text-white text-xl font-medium mb-6">Entrar na conta</h2>
+
+        <!-- Erro -->
+        <div v-if="error" role="alert"
+          class="bg-red-950 border border-red-800 text-red-300 text-sm rounded-lg px-4 py-3 mb-4">
+          {{ error }}
+        </div>
+
+        <form @submit.prevent="handleLogin" novalidate>
+          <!-- Email -->
+          <div class="mb-4">
+            <label for="email" class="block text-zinc-400 text-sm mb-2">E-mail</label>
+            <input
+              id="email"
+              v-model="form.email"
+              type="email"
+              autocomplete="email"
+              placeholder="seu@email.com"
+              required
+              class="w-full bg-zinc-800 border border-zinc-700 text-white rounded-lg px-4 py-3 text-sm
+                     placeholder-zinc-600 focus:outline-none focus:border-gold-500 transition-colors"
+            />
+          </div>
+
+          <!-- Senha -->
+          <div class="mb-6">
+            <label for="password" class="block text-zinc-400 text-sm mb-2">Senha</label>
+            <input
+              id="password"
+              v-model="form.password"
+              type="password"
+              autocomplete="current-password"
+              placeholder="••••••••"
+              required
+              class="w-full bg-zinc-800 border border-zinc-700 text-white rounded-lg px-4 py-3 text-sm
+                     placeholder-zinc-600 focus:outline-none focus:border-gold-500 transition-colors"
+            />
+          </div>
+
+          <!-- Botão -->
+          <button
+            type="submit"
+            :disabled="loading"
+            class="w-full bg-gold-500 hover:bg-gold-600 disabled:opacity-50 disabled:cursor-not-allowed
+                   text-black font-semibold rounded-lg px-4 py-3 text-sm transition-colors"
+          >
+            {{ loading ? 'Entrando...' : 'Entrar' }}
+          </button>
+        </form>
+
+        <p class="text-center text-zinc-500 text-sm mt-6">
+          Não tem conta?
+          <RouterLink to="/register" class="text-gold-500 hover:text-gold-400 transition-colors">
+            Cadastre-se
+          </RouterLink>
+        </p>
+      </div>
+
+    </div>
+  </main>
+</template>
+
+<script setup>
+import { ref, reactive } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
+import { useAuthStore } from '../stores/auth.js'
+
+const router = useRouter()
+const route = useRoute()
+const auth = useAuthStore()
+
+const form = reactive({ email: '', password: '' })
+const error = ref('')
+const loading = ref(false)
+
+async function handleLogin() {
+  error.value = ''
+  loading.value = true
+  try {
+    await auth.login(form.email, form.password)
+    const redirect = route.query.redirect || (auth.isAdmin ? '/admin' : '/')
+    router.push(redirect)
+  } catch (err) {
+    error.value = err.response?.data?.error || 'Erro ao fazer login'
+  } finally {
+    loading.value = false
+  }
+}
+</script>

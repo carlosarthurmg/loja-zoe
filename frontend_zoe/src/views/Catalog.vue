@@ -1,0 +1,3 @@
+<template>
+  <div class="min-h-screen bg-zinc-950"></div>
+</template>
