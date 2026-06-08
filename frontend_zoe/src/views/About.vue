@@ -1,67 +1,124 @@
 <template>
-  <div class="min-h-screen bg-zinc-950 pt-24 pb-12">
+  <div class="min-h-screen bg-black">
     <Navbar />
-    <main class="max-w-2xl mx-auto px-4">
-      <!-- Cabeçalho -->
-      <div class="text-center mb-16">
-        <h1 class="text-4xl font-light tracking-[0.3em] text-gold-500 mb-2">ZOE</h1>
-        <p class="text-zinc-500 text-sm tracking-widest">JOIAS ARTESANAIS</p>
+
+    <!-- Header -->
+    <section class="pt-32 pb-20 px-4 text-center border-b border-white/10">
+      <p class="text-white/30 text-xs tracking-[0.4em] uppercase mb-4">Nossa história</p>
+      <h1 class="text-5xl font-thin tracking-[0.5em] text-white mb-4">ZOE</h1>
+      <p class="text-white/40 text-sm tracking-widest">ACESSÓRIOS FEMININOS</p>
+    </section>
+
+    <main class="max-w-3xl mx-auto px-4 py-20">
+      <!-- O nome -->
+      <div class="mb-16">
+        <p class="text-white/30 text-xs tracking-[0.4em] uppercase mb-6">O nome</p>
+        <h2 class="text-2xl font-thin text-white mb-6 leading-relaxed">
+          Zoe significa <span class="text-white/60">"vida"</span> em grego.
+        </h2>
+        <p class="text-white/50 text-sm leading-relaxed">
+          Escolhemos esse nome porque acreditamos que os acessórios são mais do que peças — eles
+          ajudam a expressar personalidade, autoestima e os momentos especiais da vida de cada
+          mulher.
+        </p>
       </div>
 
-      <!-- História -->
-      <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-8 mb-6">
-        <h2 class="text-white font-medium text-lg mb-4">Nossa História</h2>
-        <p class="text-zinc-400 text-sm leading-relaxed mb-4">
-          A Zoe nasceu do amor por peças únicas e artesanais. Cada joia é criada com dedicação,
-          usando materiais de qualidade como prata 925 e banho de ouro 18k.
+      <!-- Divisor -->
+      <div class="w-full h-px bg-white/10 mb-16" />
+
+      <!-- A história -->
+      <div class="mb-16">
+        <p class="text-white/30 text-xs tracking-[0.4em] uppercase mb-6">Como surgiu</p>
+        <p class="text-white/60 text-sm leading-relaxed mb-4">
+          A Zoe nasceu de uma paixão por peças que valorizam a beleza feminina. Enxergamos nisso uma
+          oportunidade de empreender com propósito — oferecer peças bonitas, de qualidade e
+          acessíveis para mulheres que gostam de se sentir ainda mais confiantes.
         </p>
-        <p class="text-zinc-400 text-sm leading-relaxed">
-          Nosso objetivo é que cada cliente se sinta especial com uma peça que conta uma história —
-          a sua história.
+        <p class="text-white/60 text-sm leading-relaxed">
+          Cada peça do nosso catálogo é escolhida com muito cuidado, pensando em estilo, modernidade
+          e bom acabamento. Não vendemos apenas acessórios — entregamos atendimento próximo e
+          cuidado com cada pedido.
         </p>
       </div>
+
+      <!-- Divisor -->
+      <div class="w-full h-px bg-white/10 mb-16" />
+
+      <!-- Para você -->
+      <div class="mb-16">
+        <p class="text-white/30 text-xs tracking-[0.4em] uppercase mb-6">Para quem é a Zoe</p>
+        <blockquote
+          class="text-xl font-thin text-white leading-relaxed mb-8 border-l border-white/20 pl-6"
+        >
+          "Para mulheres que gostam de se cuidar, valorizam os detalhes e entendem que um acessório
+          pode transformar um visual."
+        </blockquote>
+        <p class="text-white/50 text-sm leading-relaxed">
+          Ela busca beleza, praticidade e autenticidade. Quando coloca uma peça Zoe, queremos que
+          ela se sinta bonita, confiante e especial — que olhe para si mesma e reconheça o seu
+          valor.
+        </p>
+      </div>
+
+      <!-- Divisor -->
+      <div class="w-full h-px bg-white/10 mb-16" />
+
+      <!-- Peças -->
+      <div class="mb-16">
+        <p class="text-white/30 text-xs tracking-[0.4em] uppercase mb-6">Nossas peças</p>
+        <p class="text-white/60 text-sm leading-relaxed">
+          Trabalhamos com bijuterias premium, escolhidas com muito cuidado para oferecer beleza,
+          qualidade e estilo. Buscamos sempre peças modernas, elegantes e que acompanhem as
+          tendências, sem abrir mão do bom acabamento. As pulseiras e os colares delicados estão
+          entre os queridinhos das clientes — peças versáteis que combinam com tudo.
+        </p>
+      </div>
+
+      <!-- Divisor -->
+      <div class="w-full h-px bg-white/10 mb-16" />
 
       <!-- Contato -->
-      <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-8 mb-6">
-        <h2 class="text-white font-medium text-lg mb-6">Contato</h2>
+      <div>
+        <p class="text-white/30 text-xs tracking-[0.4em] uppercase mb-8">Fale conosco</p>
         <div class="flex flex-col gap-4">
           <a
             href="https://wa.me/5586999282904"
             target="_blank"
             rel="noopener noreferrer"
-            class="flex items-center gap-4 bg-green-900/20 hover:bg-green-900/40 border border-green-900/50 rounded-xl p-4 transition-colors"
+            class="flex items-center justify-between border border-white/10 hover:border-white/30 p-5 transition-colors group"
           >
-            <span class="text-2xl">📱</span>
-            <div>
-              <p class="text-white text-sm font-medium">WhatsApp</p>
-              <p class="text-zinc-400 text-xs">(86) 99928-2904</p>
+            <div class="flex items-center gap-4">
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
+                alt="WhatsApp"
+                class="w-6 h-6"
+              />
+              <div>
+                <p class="text-white text-sm mb-1">WhatsApp</p>
+                <p class="text-white/40 text-xs">(86) 99928-2904</p>
+              </div>
             </div>
+            <span class="text-white/30 group-hover:text-white transition-colors text-sm">→</span>
           </a>
           <a
             href="https://instagram.com/zoe.oficial__"
             target="_blank"
             rel="noopener noreferrer"
-            class="flex items-center gap-4 bg-pink-900/20 hover:bg-pink-900/40 border border-pink-900/50 rounded-xl p-4 transition-colors"
+            class="flex items-center justify-between border border-white/10 hover:border-white/30 p-5 transition-colors group"
           >
-            <span class="text-2xl">📸</span>
-            <div>
-              <p class="text-white text-sm font-medium">Instagram</p>
-              <p class="text-zinc-400 text-xs">@zoe.oficial__</p>
+            <div class="flex items-center gap-4">
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png"
+                alt="Instagram"
+                class="w-6 h-6 rounded-lg"
+              />
+              <div>
+                <p class="text-white text-sm mb-1">Instagram</p>
+                <p class="text-white/40 text-xs">@zoe.oficial__</p>
+              </div>
             </div>
+            <span class="text-white/30 group-hover:text-white transition-colors text-sm">→</span>
           </a>
-        </div>
-      </div>
-
-      <!-- Diferenciais -->
-      <div class="grid grid-cols-2 gap-4">
-        <div
-          v-for="item in diferenciais"
-          :key="item.title"
-          class="bg-zinc-900 border border-zinc-800 rounded-2xl p-5 text-center"
-        >
-          <p class="text-2xl mb-2">{{ item.icon }}</p>
-          <p class="text-white text-sm font-medium mb-1">{{ item.title }}</p>
-          <p class="text-zinc-500 text-xs">{{ item.desc }}</p>
         </div>
       </div>
     </main>
@@ -70,11 +127,4 @@
 
 <script setup>
 import Navbar from '../components/Navbar.vue'
-
-const diferenciais = [
-  { icon: '✦', title: 'Artesanal', desc: 'Cada peça feita à mão com cuidado' },
-  { icon: '💎', title: 'Qualidade', desc: 'Prata 925 e ouro 18k' },
-  { icon: '📦', title: 'Entrega', desc: 'Para todo o Brasil' },
-  { icon: '💛', title: 'Com amor', desc: 'Feito com dedicação' },
-]
 </script>

@@ -2,14 +2,25 @@ import { supabase } from '../services/supabase.js'
 
 export async function createOrder(req, res) {
   try {
-    const { items, total } = req.body
+    const { items, total, customer_name, customer_phone, address_street, address_number,
+      address_complement, address_neighborhood, address_city, address_state, address_zip } = req.body
 
     if (!items || items.length === 0)
       return res.status(400).json({ error: 'Nenhum item no pedido' })
 
+    if (!address_street || !address_city || !address_zip)
+      return res.status(400).json({ error: 'Endereço de entrega obrigatório' })
+
     const { data: order, error: orderError } = await supabase
       .from('orders')
-      .insert({ user_id: req.user.id, total, status: 'aguardando_pagamento', payment_status: 'pendente' })
+      .insert({
+        user_id: req.user.id, total,
+        status: 'aguardando_pagamento',
+        payment_status: 'pendente',
+        customer_name, customer_phone,
+        address_street, address_number, address_complement,
+        address_neighborhood, address_city, address_state, address_zip
+      })
       .select()
       .single()
 
@@ -27,6 +38,7 @@ export async function createOrder(req, res) {
 
     res.status(201).json({ order })
   } catch (err) {
+    console.error(err)
     res.status(500).json({ error: 'Erro ao criar pedido' })
   }
 }

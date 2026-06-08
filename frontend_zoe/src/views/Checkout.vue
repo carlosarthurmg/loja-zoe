@@ -23,9 +23,9 @@
       </div>
 
       <div v-else>
-        <!-- Resumo do pedido -->
+        <!-- Resumo -->
         <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 mb-6">
-          <h2 class="text-white font-medium mb-4">Resumo</h2>
+          <h2 class="text-white font-medium mb-4">Resumo do pedido</h2>
           <div
             v-for="item in cart.items"
             :key="item.id"
@@ -50,14 +50,116 @@
           </div>
         </div>
 
+        <!-- Dados do cliente -->
+        <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 mb-6">
+          <h2 class="text-white font-medium mb-4">Seus dados</h2>
+          <div class="flex flex-col gap-4">
+            <div>
+              <label class="block text-zinc-400 text-sm mb-2">Nome completo *</label>
+              <input
+                v-model="form.customer_name"
+                type="text"
+                placeholder="Seu nome completo"
+                class="w-full bg-zinc-800 border border-zinc-700 text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-gold-500 transition-colors"
+              />
+            </div>
+            <div>
+              <label class="block text-zinc-400 text-sm mb-2">WhatsApp *</label>
+              <input
+                v-model="form.customer_phone"
+                type="tel"
+                placeholder="(00) 00000-0000"
+                class="w-full bg-zinc-800 border border-zinc-700 text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-gold-500 transition-colors"
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- Endereço -->
+        <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 mb-6">
+          <h2 class="text-white font-medium mb-4">Endereço de entrega</h2>
+          <div class="flex flex-col gap-4">
+            <div>
+              <label class="block text-zinc-400 text-sm mb-2">CEP *</label>
+              <input
+                v-model="form.address_zip"
+                type="text"
+                placeholder="00000-000"
+                maxlength="9"
+                @input="fetchCep"
+                class="w-full bg-zinc-800 border border-zinc-700 text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-gold-500 transition-colors"
+              />
+              <p v-if="cepLoading" class="text-zinc-500 text-xs mt-1">Buscando CEP...</p>
+              <p v-if="cepError" class="text-red-400 text-xs mt-1">{{ cepError }}</p>
+            </div>
+            <div>
+              <label class="block text-zinc-400 text-sm mb-2">Rua *</label>
+              <input
+                v-model="form.address_street"
+                type="text"
+                placeholder="Nome da rua"
+                class="w-full bg-zinc-800 border border-zinc-700 text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-gold-500 transition-colors"
+              />
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label class="block text-zinc-400 text-sm mb-2">Número *</label>
+                <input
+                  v-model="form.address_number"
+                  type="text"
+                  placeholder="123"
+                  class="w-full bg-zinc-800 border border-zinc-700 text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-gold-500 transition-colors"
+                />
+              </div>
+              <div>
+                <label class="block text-zinc-400 text-sm mb-2">Complemento</label>
+                <input
+                  v-model="form.address_complement"
+                  type="text"
+                  placeholder="Apto, bloco..."
+                  class="w-full bg-zinc-800 border border-zinc-700 text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-gold-500 transition-colors"
+                />
+              </div>
+            </div>
+            <div>
+              <label class="block text-zinc-400 text-sm mb-2">Bairro</label>
+              <input
+                v-model="form.address_neighborhood"
+                type="text"
+                placeholder="Bairro"
+                class="w-full bg-zinc-800 border border-zinc-700 text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-gold-500 transition-colors"
+              />
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label class="block text-zinc-400 text-sm mb-2">Cidade *</label>
+                <input
+                  v-model="form.address_city"
+                  type="text"
+                  placeholder="Cidade"
+                  class="w-full bg-zinc-800 border border-zinc-700 text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-gold-500 transition-colors"
+                />
+              </div>
+              <div>
+                <label class="block text-zinc-400 text-sm mb-2">Estado</label>
+                <input
+                  v-model="form.address_state"
+                  type="text"
+                  placeholder="UF"
+                  maxlength="2"
+                  class="w-full bg-zinc-800 border border-zinc-700 text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-gold-500 transition-colors"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- PIX -->
         <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 mb-6">
           <h2 class="text-white font-medium mb-4">Pagamento via PIX</h2>
           <p class="text-zinc-400 text-sm mb-4">
-            Após confirmar o pedido, realize o PIX e envie o comprovante abaixo.
+            Após confirmar o pedido, realize o PIX e envie o comprovante.
           </p>
-
-          <!-- Chave PIX -->
           <div class="bg-zinc-800 rounded-xl p-4 mb-4">
             <p class="text-zinc-500 text-xs mb-1">Chave PIX (Celular)</p>
             <div class="flex items-center justify-between gap-3">
@@ -70,15 +172,12 @@
               </button>
             </div>
           </div>
-
           <p class="text-zinc-500 text-xs">Titular: Raissa Moraes</p>
         </div>
 
         <!-- Comprovante -->
         <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 mb-6">
           <h2 class="text-white font-medium mb-4">Enviar Comprovante</h2>
-
-          <!-- Upload -->
           <div class="mb-4">
             <label class="block text-zinc-400 text-sm mb-2">Upload pelo site</label>
             <input
@@ -89,14 +188,11 @@
             />
             <p v-if="fileName" class="text-green-400 text-xs mt-2">✓ {{ fileName }}</p>
           </div>
-
           <div class="flex items-center gap-3 my-4">
             <div class="flex-1 border-t border-zinc-800" />
             <span class="text-zinc-600 text-xs">ou envie por</span>
             <div class="flex-1 border-t border-zinc-800" />
           </div>
-
-          <!-- WhatsApp e Instagram -->
           <div class="grid grid-cols-2 gap-3">
             <a
               :href="`https://wa.me/5586999282904?text=Olá! Segue o comprovante do meu pedido.`"
@@ -104,7 +200,7 @@
               rel="noopener noreferrer"
               class="flex items-center justify-center gap-2 bg-green-900/40 hover:bg-green-900/60 border border-green-800 text-green-400 text-sm py-3 rounded-xl transition-colors"
             >
-              <span>📱</span> WhatsApp
+              📱 WhatsApp
             </a>
             <a
               href="https://instagram.com/zoe.oficial__"
@@ -112,9 +208,31 @@
               rel="noopener noreferrer"
               class="flex items-center justify-center gap-2 bg-pink-900/40 hover:bg-pink-900/60 border border-pink-800 text-pink-400 text-sm py-3 rounded-xl transition-colors"
             >
-              <span>📸</span> Instagram
+              📸 Instagram
             </a>
           </div>
+        </div>
+
+        <!-- Termos -->
+        <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 mb-6">
+          <label class="flex items-start gap-3 cursor-pointer">
+            <input
+              v-model="acceptedTerms"
+              type="checkbox"
+              class="mt-1 w-4 h-4 accent-yellow-500 cursor-pointer flex-shrink-0"
+            />
+            <span class="text-zinc-400 text-sm leading-relaxed">
+              Li e aceito os
+              <RouterLink to="/terms" class="text-gold-500 hover:text-gold-400 underline"
+                >Termos de Uso</RouterLink
+              >
+              e a
+              <RouterLink to="/privacy" class="text-gold-500 hover:text-gold-400 underline"
+                >Política de Privacidade</RouterLink
+              >
+              da Zoe Acessórios.
+            </span>
+          </label>
         </div>
 
         <!-- Erro -->
@@ -129,7 +247,7 @@
         <!-- Botão confirmar -->
         <button
           @click="placeOrder"
-          :disabled="loading"
+          :disabled="loading || !acceptedTerms"
           class="w-full bg-gold-500 hover:bg-gold-600 disabled:opacity-50 disabled:cursor-not-allowed text-black font-semibold py-4 rounded-xl transition-colors text-lg"
         >
           {{ loading ? 'Processando...' : 'Confirmar Pedido' }}
@@ -140,13 +258,15 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, reactive, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import Navbar from '../components/Navbar.vue'
 import { useCartStore } from '../stores/cart.js'
+import { useAuthStore } from '../stores/auth.js'
 import api from '../services/api.js'
 
 const cart = useCartStore()
+const auth = useAuthStore()
 const router = useRouter()
 
 const pixKey = '86999282904'
@@ -155,6 +275,21 @@ const fileName = ref('')
 const loading = ref(false)
 const error = ref('')
 const orderPlaced = ref(false)
+const acceptedTerms = ref(false)
+const cepLoading = ref(false)
+const cepError = ref('')
+
+const form = reactive({
+  customer_name: auth.user?.name || '',
+  customer_phone: '',
+  address_zip: '',
+  address_street: '',
+  address_number: '',
+  address_complement: '',
+  address_neighborhood: '',
+  address_city: '',
+  address_state: '',
+})
 
 function copyPix() {
   navigator.clipboard.writeText(pixKey)
@@ -167,8 +302,44 @@ function handleFile(e) {
   if (file) fileName.value = file.name
 }
 
+async function fetchCep() {
+  const cep = form.address_zip.replace(/\D/g, '')
+  if (cep.length !== 8) return
+  cepLoading.value = true
+  cepError.value = ''
+  try {
+    const res = await fetch(`https://viacep.com.br/ws/${cep}/json/`)
+    const data = await res.json()
+    if (data.erro) {
+      cepError.value = 'CEP não encontrado'
+      return
+    }
+    form.address_street = data.logradouro || ''
+    form.address_neighborhood = data.bairro || ''
+    form.address_city = data.localidade || ''
+    form.address_state = data.uf || ''
+  } catch {
+    cepError.value = 'Erro ao buscar CEP'
+  } finally {
+    cepLoading.value = false
+  }
+}
+
 async function placeOrder() {
   if (cart.items.length === 0) return
+  if (!form.customer_name || !form.customer_phone) {
+    error.value = 'Preencha seu nome e WhatsApp'
+    return
+  }
+  if (!form.address_street || !form.address_number || !form.address_city || !form.address_zip) {
+    error.value = 'Preencha o endereço completo'
+    return
+  }
+  if (!acceptedTerms.value) {
+    error.value = 'Você precisa aceitar os termos para continuar'
+    return
+  }
+
   error.value = ''
   loading.value = true
   try {
@@ -177,7 +348,7 @@ async function placeOrder() {
       quantity: item.quantity,
       price: item.is_promo && item.promo_price ? item.promo_price : item.price,
     }))
-    await api.post('/orders', { items, total: cart.total })
+    await api.post('/orders', { items, total: cart.total, ...form })
     cart.clear()
     orderPlaced.value = true
   } catch (err) {

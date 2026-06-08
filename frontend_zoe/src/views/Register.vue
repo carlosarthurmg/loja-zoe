@@ -88,10 +88,31 @@
             />
           </div>
 
+          <!-- Termos -->
+          <div class="mb-6">
+            <label class="flex items-start gap-3 cursor-pointer">
+              <input
+                v-model="acceptedTerms"
+                type="checkbox"
+                class="mt-1 w-4 h-4 accent-yellow-500 cursor-pointer flex-shrink-0"
+              />
+              <span class="text-zinc-400 text-sm leading-relaxed">
+                Li e aceito os
+                <RouterLink to="/terms" class="text-gold-500 hover:text-gold-400 underline"
+                  >Termos de Uso</RouterLink
+                >
+                e a
+                <RouterLink to="/privacy" class="text-gold-500 hover:text-gold-400 underline"
+                  >Política de Privacidade</RouterLink
+                >
+              </span>
+            </label>
+          </div>
+
           <!-- Botão -->
           <button
             type="submit"
-            :disabled="loading"
+            :disabled="loading || !acceptedTerms"
             class="w-full bg-gold-500 hover:bg-gold-600 disabled:opacity-50 disabled:cursor-not-allowed text-black font-semibold rounded-lg px-4 py-3 text-sm transition-colors"
           >
             {{ loading ? 'Criando conta...' : 'Criar conta' }}
@@ -121,9 +142,15 @@ const form = reactive({ name: '', email: '', password: '', confirmPassword: '' }
 const error = ref('')
 const success = ref(false)
 const loading = ref(false)
+const acceptedTerms = ref(false)
 
 async function handleRegister() {
   error.value = ''
+
+  if (!acceptedTerms.value) {
+    error.value = 'Você precisa aceitar os termos para continuar'
+    return
+  }
 
   if (form.password !== form.confirmPassword) {
     error.value = 'As senhas não coincidem'

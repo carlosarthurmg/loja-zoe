@@ -7,7 +7,7 @@
       aria-label="Navegação principal"
     >
       <!-- Logo -->
-      <RouterLink to="/" class="text-gold-500 text-xl font-light tracking-[0.3em]">ZOE</RouterLink>
+      <RouterLink to="/" class="text-white text-xl font-light tracking-[0.3em]">ZOE</RouterLink>
 
       <!-- Menu Desktop -->
       <ul class="hidden md:flex items-center gap-6 list-none">

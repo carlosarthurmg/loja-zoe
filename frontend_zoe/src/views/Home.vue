@@ -1,108 +1,171 @@
 <template>
-  <div class="min-h-screen bg-zinc-950">
+  <div class="min-h-screen bg-black">
     <Navbar />
 
-    <!-- Hero -->
-    <section class="relative min-h-screen flex items-center justify-center px-4 pt-16">
-      <div class="text-center max-w-2xl mx-auto">
-        <p class="text-gold-500 text-xs tracking-[0.4em] uppercase mb-6">Coleção Exclusiva</p>
-        <h1 class="text-5xl md:text-7xl font-light text-white tracking-wide mb-6">ZOE</h1>
-        <p class="text-zinc-400 text-lg font-light mb-10 leading-relaxed">
-          Joias artesanais que contam histórias.<br />
-          Cada peça criada com amor e dedicação.
-        </p>
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+    <!-- HERO com carrossel ticker -->
+    <section class="relative h-screen overflow-hidden pt-16">
+      <div class="flex h-full ticker-track">
+        <div
+          v-for="slide in slidesLoop"
+          :key="slide.idUnique"
+          class="flex-shrink-0 h-full w-[80vw] sm:w-[45vw] md:w-[32vw] px-1"
+        >
+          <div class="w-full h-full overflow-hidden">
+            <img
+              v-if="slide.image"
+              :src="slide.image"
+              alt="Zoe Joias"
+              class="w-full h-full object-cover object-center"
+            />
+            <div v-else class="w-full h-full bg-zinc-900 flex items-center justify-center">
+              <span class="text-zinc-700 text-4xl">✦</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Logo sobreposta -->
+      <div
+        class="absolute inset-0 flex flex-col items-center justify-end pb-16 pointer-events-none z-10"
+      >
+        <div class="text-center">
+          <div class="w-16 h-px bg-white/40 mx-auto mb-4" />
+          <h1 class="text-6xl md:text-8xl font-thin tracking-[0.5em] text-white drop-shadow-lg">
+            ZOE
+          </h1>
+          <p class="text-white/70 text-xs tracking-[0.4em] uppercase mt-2">Acessórios Femininos</p>
+          <div class="w-16 h-px bg-white/40 mx-auto mt-4 mb-6" />
           <RouterLink
             to="/catalog"
-            class="bg-gold-500 hover:bg-gold-600 text-black font-semibold px-8 py-4 rounded-xl transition-colors text-sm tracking-wide"
+            class="pointer-events-auto border border-white/60 hover:border-white hover:bg-white hover:text-black text-white text-xs tracking-[0.3em] uppercase px-8 py-3 transition-all duration-300 inline-block"
           >
             Ver Coleção
           </RouterLink>
-          <RouterLink
-            to="/about"
-            class="border border-zinc-700 hover:border-zinc-500 text-zinc-400 hover:text-white px-8 py-4 rounded-xl transition-colors text-sm"
-          >
-            Nossa História
-          </RouterLink>
         </div>
-      </div>
-
-      <!-- Scroll indicator -->
-      <div
-        class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce"
-      >
-        <div class="w-px h-8 bg-zinc-700" />
-        <p class="text-zinc-600 text-xs tracking-widest">EXPLORAR</p>
       </div>
     </section>
 
-    <!-- Categorias -->
-    <section class="py-20 px-4">
+    <!-- FRASE DE IMPACTO -->
+    <section class="py-24 px-4 bg-black">
+      <div class="max-w-3xl mx-auto text-center">
+        <p class="text-white/20 text-xs tracking-[0.4em] uppercase mb-6">Nossa essência</p>
+        <blockquote class="text-2xl md:text-3xl font-thin text-white leading-relaxed">
+          "Mais do que acessórios,<br />
+          <span class="text-white/70">peças que acompanham a sua história."</span>
+        </blockquote>
+        <div class="w-8 h-px bg-white/30 mx-auto mt-8" />
+      </div>
+    </section>
+
+    <!-- CATEGORIAS -->
+    <section class="py-20 px-4 bg-zinc-950">
       <div class="max-w-6xl mx-auto">
         <div class="text-center mb-12">
-          <h2 class="text-2xl font-light text-white tracking-wide mb-2">Categorias</h2>
-          <p class="text-zinc-500 text-sm">Encontre a peça perfeita para você</p>
+          <p class="text-white/30 text-xs tracking-[0.4em] uppercase mb-3">Explore</p>
+          <h2 class="text-2xl font-thin text-white tracking-widest">COLEÇÕES</h2>
         </div>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
           <RouterLink
             v-for="cat in categories"
             :key="cat.value"
             :to="`/catalog?category=${cat.value}`"
-            class="bg-zinc-900 border border-zinc-800 hover:border-gold-500/50 rounded-2xl p-6 text-center transition-all group"
+            class="relative aspect-square overflow-hidden group"
           >
-            <p class="text-3xl mb-3">{{ cat.icon }}</p>
-            <p class="text-white text-sm font-medium group-hover:text-gold-500 transition-colors">
-              {{ cat.label }}
-            </p>
+            <!-- Foto ou placeholder -->
+            <img
+              v-if="cat.image"
+              :src="cat.image"
+              :alt="cat.label"
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+            />
+            <div
+              v-else
+              class="w-full h-full bg-zinc-900 flex items-center justify-center transition-colors group-hover:bg-zinc-800"
+            >
+              <span class="text-zinc-600 text-4xl">{{ cat.icon }}</span>
+            </div>
+            <!-- Overlay -->
+            <div
+              class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors duration-300"
+            />
+            <!-- Label -->
+            <div class="absolute bottom-0 left-0 right-0 p-4">
+              <p class="text-white text-sm tracking-[0.2em] uppercase font-light">
+                {{ cat.label }}
+              </p>
+            </div>
           </RouterLink>
         </div>
       </div>
     </section>
 
-    <!-- Produtos em destaque -->
-    <section class="py-20 px-4 bg-zinc-900/30">
+    <!-- EM DESTAQUE -->
+    <section class="py-20 px-4 bg-black">
       <div class="max-w-6xl mx-auto">
-        <div class="flex items-center justify-between mb-12">
+        <div class="flex items-end justify-between mb-12">
           <div>
-            <h2 class="text-2xl font-light text-white tracking-wide mb-1">Em Destaque</h2>
-            <p class="text-zinc-500 text-sm">Peças mais amadas da coleção</p>
+            <p class="text-white/30 text-xs tracking-[0.4em] uppercase mb-3">Seleção especial</p>
+            <h2 class="text-2xl font-thin text-white tracking-widest">EM DESTAQUE</h2>
           </div>
           <RouterLink
             to="/catalog"
-            class="text-gold-500 hover:text-gold-400 text-sm transition-colors"
+            class="text-white/50 hover:text-white text-xs tracking-widest uppercase transition-colors border-b border-white/20 hover:border-white pb-0.5"
           >
-            Ver todas →
+            Ver tudo
           </RouterLink>
         </div>
 
         <div v-if="loading" class="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <div
-            v-for="n in 4"
-            :key="n"
-            class="bg-zinc-900 rounded-2xl aspect-square animate-pulse"
-          />
+          <div v-for="n in 4" :key="n" class="bg-zinc-900 rounded aspect-square animate-pulse" />
         </div>
-
         <div v-else class="grid grid-cols-2 md:grid-cols-4 gap-4">
           <ProductCard v-for="product in featured" :key="product.id" :product="product" />
         </div>
       </div>
     </section>
 
-    <!-- Promoções -->
-    <section v-if="promos.length > 0" class="py-20 px-4">
-      <div class="max-w-6xl mx-auto">
-        <div class="flex items-center justify-between mb-12">
-          <div>
-            <h2 class="text-2xl font-light text-white tracking-wide mb-1">Promoções</h2>
-            <p class="text-zinc-500 text-sm">Aproveite os preços especiais</p>
+    <!-- QUEM É A MULHER ZOE -->
+    <section class="py-24 px-4 bg-zinc-950">
+      <div class="max-w-4xl mx-auto">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+          <!-- Foto Raissa -->
+          <div class="aspect-[3/4] overflow-hidden">
+            <img
+              src="/ftRaissa.jpeg"
+              alt="Raissa — Zoe Acessórios"
+              class="w-full h-full object-contain bg-zinc-950"
+            />
           </div>
-          <RouterLink
-            to="/catalog"
-            class="text-gold-500 hover:text-gold-400 text-sm transition-colors"
-          >
-            Ver todas →
-          </RouterLink>
+          <!-- Texto -->
+          <div>
+            <p class="text-white/30 text-xs tracking-[0.4em] uppercase mb-6">Para você que</p>
+            <h2 class="text-3xl font-thin text-white leading-relaxed mb-8">
+              Se cuida,<br />valoriza detalhes<br />
+              <span class="text-white/50">e sabe que um acessório<br />transforma o visual.</span>
+            </h2>
+            <p class="text-white/50 text-sm leading-relaxed mb-8">
+              A mulher que usa peças da Zoe busca beleza, praticidade e autenticidade. Ela entende
+              que cada peça diz algo sobre quem ela é.
+            </p>
+            <RouterLink
+              to="/catalog"
+              class="inline-block border border-white/40 hover:border-white hover:bg-white hover:text-black text-white text-xs tracking-[0.3em] uppercase px-6 py-3 transition-all duration-300"
+            >
+              Encontrar minha peça
+            </RouterLink>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROMOÇÕES -->
+    <section v-if="promos.length > 0" class="py-20 px-4 bg-black">
+      <div class="max-w-6xl mx-auto">
+        <div class="flex items-end justify-between mb-12">
+          <div>
+            <p class="text-white/30 text-xs tracking-[0.4em] uppercase mb-3">Preços especiais</p>
+            <h2 class="text-2xl font-thin text-white tracking-widest">PROMOÇÕES</h2>
+          </div>
         </div>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
           <ProductCard v-for="product in promos" :key="product.id" :product="product" />
@@ -110,48 +173,108 @@
       </div>
     </section>
 
-    <!-- Banner PIX -->
-    <section class="py-20 px-4 bg-zinc-900/30">
-      <div class="max-w-2xl mx-auto text-center">
-        <p class="text-3xl mb-4">✦</p>
-        <h2 class="text-2xl font-light text-white mb-4">Pagamento Simples e Seguro</h2>
-        <p class="text-zinc-400 text-sm leading-relaxed mb-8">
-          Aceitamos pagamento via PIX. Rápido, seguro e sem complicações. Faça seu pedido e envie o
-          comprovante pelo site, WhatsApp ou Instagram.
-        </p>
-        <div class="flex flex-wrap justify-center gap-6 text-sm text-zinc-500">
-          <span class="flex items-center gap-2">✓ Pagamento via PIX</span>
-          <span class="flex items-center gap-2">✓ Entrega para todo Brasil</span>
-          <span class="flex items-center gap-2">✓ Peças artesanais</span>
+    <!-- COMO FUNCIONA -->
+    <section class="py-24 px-4 bg-zinc-950">
+      <div class="max-w-4xl mx-auto text-center">
+        <p class="text-white/30 text-xs tracking-[0.4em] uppercase mb-3">Simples assim</p>
+        <h2 class="text-2xl font-thin text-white tracking-widest mb-16">COMO COMPRAR</h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div v-for="step in steps" :key="step.num" class="flex flex-col items-center gap-4">
+            <div
+              class="w-10 h-10 border border-white/20 flex items-center justify-center text-white/50 text-sm font-thin"
+            >
+              {{ step.num }}
+            </div>
+            <p class="text-white text-sm font-light">{{ step.title }}</p>
+            <p class="text-white/40 text-xs leading-relaxed">{{ step.desc }}</p>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="border-t border-zinc-800 py-12 px-4">
-      <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-        <div class="text-center md:text-left">
-          <p class="text-gold-500 text-xl font-light tracking-[0.3em]">ZOE</p>
-          <p class="text-zinc-600 text-xs mt-1">Joias artesanais com amor</p>
+    <!-- FOOTER -->
+    <footer class="border-t border-white/10 py-16 px-4 bg-black">
+      <div class="max-w-6xl mx-auto">
+        <div class="grid md:grid-cols-3 gap-12 mb-12">
+          <div>
+            <p class="text-white text-2xl font-thin tracking-[0.4em] mb-3">ZOE</p>
+            <p class="text-white/40 text-xs leading-relaxed">
+              Acessórios femininos escolhidos com carinho para mulheres que valorizam beleza e
+              autenticidade.
+            </p>
+          </div>
+          <div>
+            <p class="text-white/30 text-xs tracking-widest uppercase mb-4">Navegação</p>
+            <div class="flex flex-col gap-3">
+              <RouterLink to="/" class="text-white/50 hover:text-white text-sm transition-colors"
+                >Início</RouterLink
+              >
+              <RouterLink
+                to="/catalog"
+                class="text-white/50 hover:text-white text-sm transition-colors"
+                >Catálogo</RouterLink
+              >
+              <RouterLink
+                to="/about"
+                class="text-white/50 hover:text-white text-sm transition-colors"
+                >Sobre</RouterLink
+              >
+            </div>
+          </div>
+          <div>
+            <p class="text-white/30 text-xs tracking-widest uppercase mb-4">Contato</p>
+            <div class="flex flex-col gap-3">
+              <a
+                href="https://wa.me/5586999282904"
+                target="_blank"
+                class="flex items-center gap-2 text-white/50 hover:text-white text-sm transition-colors"
+              >
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
+                  alt="WhatsApp"
+                  class="w-4 h-4"
+                />
+                (86) 99928-2904
+              </a>
+              <a
+                href="https://instagram.com/zoe.oficial__"
+                target="_blank"
+                class="flex items-center gap-2 text-white/50 hover:text-white text-sm transition-colors"
+              >
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png"
+                  alt="Instagram"
+                  class="w-4 h-4 rounded-sm"
+                />
+                @zoe.oficial__
+              </a>
+            </div>
+          </div>
         </div>
-        <div class="flex gap-6 text-sm text-zinc-500">
-          <RouterLink to="/catalog" class="hover:text-white transition-colors">Catálogo</RouterLink>
-          <RouterLink to="/about" class="hover:text-white transition-colors">Sobre</RouterLink>
-          <a
-            href="https://instagram.com/zoe.oficial__"
-            target="_blank"
-            class="hover:text-white transition-colors"
-            >Instagram</a
-          >
+        <div
+          class="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4"
+        >
+          <p class="text-white/20 text-xs tracking-widest">© 2026 ZOE ACESSÓRIOS</p>
+          <p class="text-white/20 text-xs">Pagamento via PIX · Entrega para todo o Brasil</p>
+          <p class="text-white/20 text-xs">
+            Desenvolvido por
+            <a
+              href="https://instagram.com/carlosarthurmg"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="hover:text-white/60 transition-colors underline underline-offset-2"
+            >
+              @carlosarthurmg
+            </a>
+          </p>
         </div>
-        <p class="text-zinc-700 text-xs">© 2025 Zoe Joias</p>
       </div>
     </footer>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import Navbar from '../components/Navbar.vue'
 import ProductCard from '../components/ProductCard.vue'
 import api from '../services/api.js'
@@ -160,11 +283,31 @@ const featured = ref([])
 const promos = ref([])
 const loading = ref(true)
 
+const slides = ref([
+  { image: 'Brinco_zoe.jpeg' },
+  { image: 'Bracelet_zoe.jpeg' },
+  { image: 'Colar_zoe.jpeg' },
+  { image: 'Bracelete_zoe.jpeg' },
+])
+
+const slidesLoop = computed(() => {
+  const original = slides.value.map((slide, index) => ({ ...slide, idUnique: `orig-${index}` }))
+  const copia = slides.value.map((slide, index) => ({ ...slide, idUnique: `copia-${index}` }))
+  return [...original, ...copia]
+})
+
 const categories = [
-  { value: 'aneis', label: 'Anéis', icon: '💍' },
-  { value: 'colares', label: 'Colares', icon: '📿' },
-  { value: 'brincos', label: 'Brincos', icon: '✨' },
-  { value: 'pulseiras', label: 'Pulseiras', icon: '⭕' },
+  { value: 'aneis', label: 'Anéis', icon: '💍', image: '' },
+  { value: 'colares', label: 'Colares', icon: '📿', image: '' },
+  { value: 'brincos', label: 'Brincos', icon: '✨', image: '' },
+  { value: 'pulseiras', label: 'Pulseiras', icon: '⭕', image: '' },
+]
+
+const steps = [
+  { num: '01', title: 'Escolha', desc: 'Navegue pelo catálogo e encontre sua peça' },
+  { num: '02', title: 'Pedido', desc: 'Adicione ao carrinho e finalize' },
+  { num: '03', title: 'PIX', desc: 'Pague via PIX e envie o comprovante' },
+  { num: '04', title: 'Entrega', desc: 'Receba em casa com todo cuidado' },
 ]
 
 onMounted(async () => {

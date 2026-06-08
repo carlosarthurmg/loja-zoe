@@ -44,6 +44,8 @@ const router = createRouter({
       component: () => import('../views/admin/Dashboard.vue'),
       meta: { requiresAuth: true, requiresAdmin: true },
     },
+    { path: '/terms', name: 'terms', component: () => import('../views/Terms.vue') },
+    { path: '/privacy', name: 'privacy', component: () => import('../views/Privacy.vue') },
     {
       path: '/admin/products',
       name: 'admin-products',
