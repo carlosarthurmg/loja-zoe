@@ -2,7 +2,7 @@
 
 > "Mais do que acessórios, peças que acompanham a sua história."
 
-Sistema web completo de e-commerce desenvolvido para a **Loja Zoe**, negócio real de acessórios femininos de Raissa Moraes (Teresina - PI). Projeto desenvolvido como Trabalho de 3ª Nota da disciplina de Programação Web.
+Sistema web completo de e-commerce desenvolvido para a **Loja Zoe**, negócio real de acessórios femininos de Raissa Moraes. Projeto desenvolvido como Trabalho de 3ª Nota da disciplina de Programação Web.
 
 ---
 
