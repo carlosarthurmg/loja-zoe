@@ -1,4 +1,4 @@
-# ✦ Zoe Acessórios — Sistema de Loja Virtual
+# Zoe Acessórios — Sistema de Loja Virtual
 
 > "Mais do que acessórios, peças que acompanham a sua história."
 
@@ -6,7 +6,7 @@ Sistema web completo de e-commerce desenvolvido para a **Loja Zoe**, negócio re
 
 ---
 
-## 📋 Índice
+## Índice
 
 - [Sobre o Sistema](#sobre-o-sistema)
 - [Tecnologias Utilizadas](#tecnologias-utilizadas)
@@ -19,7 +19,7 @@ Sistema web completo de e-commerce desenvolvido para a **Loja Zoe**, negócio re
 
 ---
 
-## 💡 Sobre o Sistema
+## Sobre o Sistema
 
 A **Zoe Acessórios** é uma loja virtual desenvolvida para um cliente real, permitindo que clientes visualizem, favoritem e comprem joias online. O pagamento é realizado via **PIX manual**, com envio de comprovante pelo próprio site, WhatsApp ou Instagram.
 
@@ -27,7 +27,7 @@ A proprietária gerencia produtos, pedidos e aprova pagamentos por um **painel a
 
 ---
 
-## 🛠 Tecnologias Utilizadas
+## Tecnologias Utilizadas
 
 ### Front-end
 
@@ -59,7 +59,7 @@ A proprietária gerencia produtos, pedidos e aprova pagamentos por um **painel a
 
 ---
 
-## ✅ Funcionalidades
+## Funcionalidades
 
 ### Área do Cliente
 
@@ -89,7 +89,7 @@ A proprietária gerencia produtos, pedidos e aprova pagamentos por um **painel a
 
 ---
 
-## 🗂 Estrutura do Projeto
+##  Estrutura do Projeto
 
 loja-zoe/
 ├── frontend_zoe/
@@ -143,7 +143,7 @@ loja-zoe/
 
 ---
 
-## ▶️ Como Executar
+##  Como Executar
 
 ### Pré-requisitos
 
@@ -214,7 +214,7 @@ UPDATE users SET role = 'admin' WHERE email = 'seu@email.com';
 
 ---
 
-## 👤 Integrantes
+## Integrantes
 
 | Nome                           | Função                                |
 | ------------------------------ | ------------------------------------- |
@@ -225,7 +225,7 @@ UPDATE users SET role = 'admin' WHERE email = 'seu@email.com';
 
 ---
 
-## 📄 Documentação
+## Documentação
 
 - [Documento de Requisitos](docs/Documento_de_Requisitos_Zoe.docx)
 - [Contrato de Prestação de Serviços](docs/Contrato_Loja_Zoe.docx)
@@ -233,4 +233,4 @@ UPDATE users SET role = 'admin' WHERE email = 'seu@email.com';
 
 ---
 
-_Desenvolvido com dedicação por [@carlosarthurmg](https://instagram.com/carlosarthurmg)_
+_Desenvolvido por [@carlosarthurmg](https://instagram.com/carlosarthurmg)_
