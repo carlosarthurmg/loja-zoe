@@ -1,8 +1,8 @@
-# Zoe Acessórios — Sistema de Loja Virtual
+# Zoe — Sistema de Loja Virtual
 
 > "Mais do que acessórios, peças que acompanham a sua história."
 
-Sistema web completo de e-commerce desenvolvido para a **Loja Zoe**, negócio real de acessórios femininos de Raissa Moraes. Projeto desenvolvido como Trabalho de 3ª Nota da disciplina de Programação Web.
+Sistema web completo de e-commerce desenvolvido para a **Loja Zoe**, negócio real de acessórios femininos de Raissa Moraes. Projeto desenvolvido por **Carlos Arthur Moraes Gonçalves** como Trabalho de 3ª Nota da disciplina de Programação Web.
 
 ---
 
@@ -11,19 +11,17 @@ Sistema web completo de e-commerce desenvolvido para a **Loja Zoe**, negócio re
 - [Sobre o Sistema](#sobre-o-sistema)
 - [Tecnologias Utilizadas](#tecnologias-utilizadas)
 - [Funcionalidades](#funcionalidades)
-- [Estrutura do Projeto](#estrutura-do-projeto)
-- [Como Executar](#como-executar)
 - [Telas do Sistema](#telas-do-sistema)
+- [Estrutura do Projeto](#estrutura-do-projeto)
 - [Banco de Dados](#banco-de-dados)
+- [Como Executar](#como-executar)
 - [Integrantes](#integrantes)
 
 ---
 
 ## Sobre o Sistema
 
-A **Zoe Acessórios** é uma loja virtual desenvolvida para um cliente real, permitindo que clientes visualizem, favoritem e comprem joias online. O pagamento é realizado via **PIX manual**, com envio de comprovante pelo próprio site, WhatsApp ou Instagram.
-
-A proprietária gerencia produtos, pedidos e aprova pagamentos por um **painel administrativo** completo.
+A **Zoe Acessórios** é uma loja virtual desenvolvida para um cliente real, permitindo que clientes visualizem o catálogo, favoritem peças, realizem compras via **PIX manual** e acompanhem seus pedidos. A proprietária gerencia produtos, pedidos e pagamentos por um **painel administrativo** completo.
 
 ---
 
@@ -64,13 +62,12 @@ A proprietária gerencia produtos, pedidos e aprova pagamentos por um **painel a
 ### Área do Cliente
 
 - ✦ Criar conta e fazer login
-- ✦ Navegar pelo catálogo com filtros por categoria
-- ✦ Buscar produtos por nome
+- ✦ Navegar pelo catálogo com filtros por categoria e busca
 - ✦ Ver detalhes completos de cada peça
 - ✦ Favoritar peças
 - ✦ Adicionar produtos ao carrinho
-- ✦ Finalizar pedido com endereço de entrega
-- ✦ Visualizar chave PIX e copiar com um clique
+- ✦ Finalizar pedido com endereço de entrega (busca automática por CEP)
+- ✦ Pagamento via PIX com chave copiável
 - ✦ Enviar comprovante pelo site, WhatsApp ou Instagram
 - ✦ Acompanhar status do pedido em tempo real
 - ✦ Aceite de Termos de Uso e Política de Privacidade (LGPD)
@@ -78,18 +75,76 @@ A proprietária gerencia produtos, pedidos e aprova pagamentos por um **painel a
 ### Área Administrativa (Raissa)
 
 - ✦ Dashboard com estatísticas em tempo real
-- ✦ CRUD completo de produtos
-- ✦ Upload de fotos diretamente pelo painel
+- ✦ CRUD completo de produtos com upload de foto
 - ✦ Salvar produto como rascunho ou publicar
-- ✦ Controle de estoque
-- ✦ Marcar produtos em promoção com preço promocional
-- ✦ Visualizar todos os pedidos com dados do cliente e endereço
+- ✦ Controle de estoque e promoções
+- ✦ Visualizar pedidos com dados do cliente e endereço
 - ✦ Aprovar ou rejeitar pagamentos
 - ✦ Atualizar status: Pago → Enviado → Entregue
 
 ---
 
-##  Estrutura do Projeto
+## Telas do Sistema
+
+### Home
+
+![Home](docs/screenshots/home.png)
+
+### Catálogo
+
+![Catálogo](docs/screenshots/catalog.png)
+
+### Detalhe do Produto
+
+![Produto](docs/screenshots/product.png)
+
+### Login
+
+![Login](docs/screenshots/login.png)
+
+### Cadastro
+
+![Cadastro](docs/screenshots/register.png)
+
+### Cadastro de Produto (Admin)
+
+![Cadastro de Produto](docs/screenshots/register-product.png)
+
+### Carrinho
+
+![Carrinho](docs/screenshots/cart.png)
+
+### Checkout
+
+![Checkout](docs/screenshots/checkout.png)
+
+### Favoritos
+
+![Favoritos](docs/screenshots/favorites.png)
+
+### Meus Pedidos
+
+![Meus Pedidos](docs/screenshots/orders.png)
+
+### Painel Admin — Dashboard
+
+![Dashboard](docs/screenshots/admin-dashboard.png)
+
+### Painel Admin — Produtos
+
+![Admin Produtos](docs/screenshots/admin-products.png)
+
+### Painel Admin — Pedidos
+
+![Admin Pedidos](docs/screenshots/admin-orders.png)
+
+### Banco de Dados — Supabase
+
+![Supabase](docs/screenshots/supabase.png)
+
+---
+
+## Estrutura do Projeto
 
 loja-zoe/
 ├── frontend_zoe/
@@ -143,7 +198,21 @@ loja-zoe/
 
 ---
 
-##  Como Executar
+## Banco de Dados
+
+5 tabelas no Supabase (PostgreSQL):
+
+| Tabela        | Descrição                       |
+| ------------- | ------------------------------- |
+| `users`       | Clientes e administradores      |
+| `products`    | Catálogo de joias com estoque   |
+| `favorites`   | Peças favoritadas por usuário   |
+| `orders`      | Pedidos com endereço de entrega |
+| `order_items` | Itens e preços de cada pedido   |
+
+---
+
+## Como Executar
 
 ### Pré-requisitos
 
@@ -200,36 +269,22 @@ UPDATE users SET role = 'admin' WHERE email = 'seu@email.com';
 
 ---
 
-## 🗄 Banco de Dados
-
-5 tabelas no Supabase (PostgreSQL):
-
-| Tabela        | Descrição                       |
-| ------------- | ------------------------------- |
-| `users`       | Clientes e administradores      |
-| `products`    | Catálogo de joias com estoque   |
-| `favorites`   | Peças favoritadas por usuário   |
-| `orders`      | Pedidos com endereço de entrega |
-| `order_items` | Itens e preços de cada pedido   |
-
----
-
-## Integrantes
+## Integrante
 
 | Nome                           | Função                                |
 | ------------------------------ | ------------------------------------- |
 | Carlos Arthur Moraes Gonçalves | Desenvolvimento completo (Full Stack) |
 
-**Cliente:** Raissa Moraes — Loja Zoe Acessórios
+**Cliente:** Raissa Moraes — Loja Zoe
 **Instagram:** [@zoe.oficial\_\_](https://instagram.com/zoe.oficial__)
 
 ---
 
 ## Documentação
 
-- [Documento de Requisitos](docs/Documento_de_Requisitos_Zoe.docx)
-- [Contrato de Prestação de Serviços](docs/Contrato_Loja_Zoe.docx)
-- [Planejamento do Projeto](docs/Planejamento_Projeto_Zoe.docx)
+- Contrato de Prestação de Serviços (assinado)
+- Documento de Requisitos
+- Planejamento do Projeto
 
 ---
 
