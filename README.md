@@ -85,65 +85,36 @@ A **Zoe Acessórios** é uma loja virtual desenvolvida para um cliente real, per
 ---
 
 ## Telas do Sistema
-
 ### Home
-
-![Home](docs/screenshots/home.png)
-
+![Home](frontend_zoe/docs/screenshots/home.png)
 ### Catálogo
-
-![Catálogo](docs/screenshots/catalog.png)
-
+![Catálogo](frontend_zoe/docs/screenshots/catalog.png)
 ### Detalhe do Produto
-
-![Produto](docs/screenshots/product.png)
-
+![Produto](frontend_zoe/docs/screenshots/product.png)
 ### Login
-
-![Login](docs/screenshots/login.png)
-
+![Login](frontend_zoe/docs/screenshots/login.png)
 ### Cadastro
-
-![Cadastro](docs/screenshots/register.png)
-
+![Cadastro](frontend_zoe/docs/screenshots/register.png)
 ### Cadastro de Produto (Admin)
-
-![Cadastro de Produto](docs/screenshots/register-product.png)
-
+![Cadastro de Produto](frontend_zoe/docs/screenshots/register-product.png)
 ### Carrinho
-
-![Carrinho](docs/screenshots/cart.png)
-
+![Carrinho](frontend_zoe/docs/screenshots/cart.png)
 ### Checkout
-
-![Checkout](docs/screenshots/checkout.png)
-
+![Checkout](frontend_zoe/docs/screenshots/checkout.png)
 ### Favoritos
-
-![Favoritos](docs/screenshots/favorites.png)
-
+![Favoritos](frontend_zoe/docs/screenshots/favorites.png)
 ### Meus Pedidos
-
-![Meus Pedidos](docs/screenshots/orders.png)
-
+![Meus Pedidos](frontend_zoe/docs/screenshots/orders.png)
 ### Painel Admin — Dashboard
-
-![Dashboard](docs/screenshots/admin-dashboard.png)
-
+![Dashboard](frontend_zoe/docs/screenshots/admin-dashboard.png)
 ### Painel Admin — Produtos
-
-![Admin Produtos](docs/screenshots/admin-products.png)
-
+![Admin Produtos](frontend_zoe/docs/screenshots/admin-products.png)
 ### Painel Admin — Pedidos
-
-![Admin Pedidos](docs/screenshots/admin-orders.png)
-
+![Admin Pedidos](frontend_zoe/docs/screenshots/admin-orders.png)
 ### Banco de Dados — Supabase
-
-![Supabase](docs/screenshots/supabase.png)
+![Supabase](frontend_zoe/docs/screenshots/supabase.png)
 
 ---
-
 ## Estrutura do Projeto
 
 loja-zoe/
