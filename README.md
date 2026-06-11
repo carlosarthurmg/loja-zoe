@@ -251,6 +251,8 @@ UPDATE users SET role = 'admin' WHERE email = 'seu@email.com';
 
 ---
 
+**Vídeo no YouTube:** [Assista ao vídeo do projeto clicando aqui](https://youtu.be/Y9GUrh2Nhzk?si=nbT4BFJTuHoYdbmv)
+
 ## Documentação
 
 - Contrato de Prestação de Serviços (assinado)
